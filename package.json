@@ -23,7 +23,14 @@
     "verdaccio": "^5.0.4"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "hnswlib-node": "^1.4.2",
+    "langchain": "^0.0.170",
+    "openai": "^4.12.4",
+    "tslib": "^2.3.0",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "youtube-transcript": "^1.0.6",
+    "zod": "^3.22.4"
   },
   "nx": {
     "includedScripts": []
