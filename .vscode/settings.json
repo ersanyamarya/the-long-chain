@@ -1,7 +1,3 @@
 {
-    "cSpell.words": [
-        "hnswlib",
-        "langchain",
-        "openai"
-    ]
+  "cSpell.words": ["hnswlib", "langchain", "openai"]
 }

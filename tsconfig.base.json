@@ -15,9 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ersanyamarya/codename-langchain": [
-        "packages/codename-langchain/src/index.ts"
-      ],
+      "@ersanyamarya/codename-langchain": ["packages/codename-langchain/src/index.ts"],
       "@the-long-chain/utils": ["shared/utils/src/index.ts"]
     }
   },

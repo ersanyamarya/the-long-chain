@@ -1,2 +1,2 @@
-export * from './lib/delay';
-export * from './lib/logger';
+export * from './lib/delay'
+export * from './lib/logger'

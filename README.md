@@ -15,16 +15,16 @@ npm install codename-langchain
 To use Codename Langchain, import it into your project:
 
 ```javascript
-const langchain = require('codename-langchain');
+const langchain = require('codename-langchain')
 ```
 
 Then, you can use its various functions to work with code:
 
 ```javascript
-const code = 'function add(a, b) { return a + b; }';
-const ast = langchain.parse(code);
-const variables = langchain.findVariables(ast);
-console.log(variables); // ['a', 'b']
+const code = 'function add(a, b) { return a + b; }'
+const ast = langchain.parse(code)
+const variables = langchain.findVariables(ast)
+console.log(variables) // ['a', 'b']
 ```
 
 ## Contributing
