@@ -50,6 +50,19 @@ export type GoogleSearchConfig = {
   youtube?: boolean
 }
 
+/**
+ * The `searchOnGoogle` function is an asynchronous function that takes a query, a logger, and a
+ * configuration object as parameters, and returns a promise that resolves to the search results from
+ * Google.
+ * @param {string} query - The query parameter is a string that represents the search query you want to
+ * perform on Google. It can be any text that you want to search for.
+ * @param {Logger} logger - The `logger` parameter is an instance of a logger object that is used to
+ * log information during the execution of the function. It is used to log messages such as the start
+ * and completion of the search.
+ * @param {GoogleSearchConfig}  - - `query`: The search query string.
+ * @returns The function `searchOnGoogle` returns a Promise that resolves to a `GoogleSearchResults`
+ * object.
+ */
 export async function searchOnGoogle(
   query: string,
   logger: Logger,
