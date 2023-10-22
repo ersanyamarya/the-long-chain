@@ -28,9 +28,12 @@
     "verdaccio": "^5.0.4"
   },
   "dependencies": {
+    "@mozilla/readability": "^0.4.4",
     "hnswlib-node": "^1.4.2",
+    "jsdom": "^22.1.0",
     "langchain": "^0.0.170",
     "openai": "^4.12.4",
+    "puppeteer": "^19.11.1",
     "tslib": "^2.3.0",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1",
