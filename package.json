@@ -9,6 +9,7 @@
   },
   "private": true,
   "devDependencies": {
+    "@nx/esbuild": "17.0.1",
     "@nx/eslint": "17.0.1",
     "@nx/eslint-plugin": "17.0.1",
     "@nx/js": "17.0.1",
@@ -21,6 +22,7 @@
     "@types/node": "~18.7.1",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
+    "esbuild": "^0.19.2",
     "eslint": "~8.46.0",
     "eslint-config-prettier": "^9.0.0",
     "nx": "17.0.1",
@@ -41,6 +43,7 @@
     "koa-body-parser": "^1.1.2",
     "koa-bodyparser": "^4.4.1",
     "langchain": "^0.0.170",
+    "mongoose": "^7.6.3",
     "openai": "^4.12.4",
     "puppeteer": "^19.11.1",
     "tslib": "^2.3.0",

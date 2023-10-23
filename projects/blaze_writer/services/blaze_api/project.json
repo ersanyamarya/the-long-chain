@@ -1,0 +1,63 @@
+{
+  "name": "blaze_api",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "projects/blaze_writer/services/blaze_api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/projects/blaze_writer/services/blaze_api",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "projects/blaze_writer/services/blaze_api/src/main.ts",
+        "tsConfig": "projects/blaze_writer/services/blaze_api/tsconfig.app.json",
+        "assets": ["projects/blaze_writer/services/blaze_api/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "blaze_api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "blaze_api:build:development"
+        },
+        "production": {
+          "buildTarget": "blaze_api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["projects/blaze_writer/services/blaze_api/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}
