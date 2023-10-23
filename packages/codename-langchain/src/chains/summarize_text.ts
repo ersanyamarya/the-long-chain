@@ -1,7 +1,7 @@
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { OpenAI } from 'langchain/llms/openai'
 import { PromptTemplate } from 'langchain/prompts'
-import { Logger } from 'winston'
+import logger from '../logger'
 import { getRetrievalChain } from '../utils'
 
 const summarizeTemplatePrompt = `I want the following document to be summarized with context: {objective}.
@@ -28,21 +28,17 @@ export interface SummarizeInputType {
 }
 
 /**
- * The function `getSummaryFromTextAndObjective` takes in a text, logger, and an object containing
- * objective, question, model, and embeddings. It retrieves a retrieval chain using the model and
- * embeddings, prompts a template with the objective and question, and calls the retrieval chain with
- * the query. The function returns the resulting text.
+ * The function `getSummaryFromTextAndObjective` takes in a text and an object containing an objective,
+ * question, model, and embeddings. It retrieves a retrieval chain using the model and embeddings,
+ * prompts a template with the objective and question, and calls the retrieval chain with the query.
+ * The function then returns the resulting text.
  * @param {string} text - The `text` parameter is a string that represents the input text that you want
  * to summarize.
- * @param {Logger} logger - The `logger` parameter is an instance of a logger object that is used to
- * log information during the execution of the `getSummaryFromTextAndObjective` function. It is
- * typically used to track the progress of the function and log any errors or important information.
  * @param {SummarizeInputType}  - - `text`: The input text that needs to be summarized.
  * @returns The function `getSummaryFromTextAndObjective` returns a Promise that resolves to a string.
  */
 export async function getSummaryFromTextAndObjective(
   text: string,
-  logger: Logger,
   { objective, question, model, embeddings }: SummarizeInputType
 ): Promise<string> {
   logger.info('----------------- Summarize: Starting ----------------- ')
