@@ -1,0 +1,33 @@
+{
+  "name": "server-essentials",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/server-essentials/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/server-essentials",
+        "tsConfig": "packages/server-essentials/tsconfig.lib.json",
+        "packageJson": "packages/server-essentials/package.json",
+        "main": "packages/server-essentials/src/index.ts",
+        "assets": ["packages/server-essentials/*.md"],
+        "updateBuildableProjectDepsInPackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "dependencies"
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs server-essentials {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/server-essentials/**/*.ts", "packages/server-essentials/package.json"]
+      }
+    }
+  },
+  "tags": []
+}
