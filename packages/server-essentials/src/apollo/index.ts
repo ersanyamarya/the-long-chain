@@ -2,7 +2,7 @@ import { ApolloServer } from '@apollo/server'
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 import { GraphQLSchema } from 'graphql'
 import { Server } from 'http'
-import logger from '../logger'
+import { logger } from '../logger'
 export async function apolloServerPlugin(schema: GraphQLSchema, httpServer: Server): Promise<ApolloServer> {
   logger.info('--------> Starting Apollo Server <--------')
 

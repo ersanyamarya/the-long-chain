@@ -1,8 +1,86 @@
-import { logger } from '@the-long-chain/utils'
-import { openAIConfig } from './config/open_ai'
-import { serperAIConfig } from './config/serper_ai'
-import { mainServiceServerConfig } from './config/server'
+import { koaMiddleware } from '@as-integrations/koa'
+import {
+  apolloServerPlugin,
+  exceptions,
+  getRootRoute,
+  gracefulShutdown,
+  koaApp,
+  router,
+  setServerEssentialsLogger,
+} from '@ersanyamarya/server-essentials'
+import { connectMongoDB, disconnectMongoDB } from '@the-long-chain/blaze-mongo'
 
-logger.info('Starting blaze_api service')
-logger.info(JSON.stringify({ serperAIConfig, openAIConfig, mainServiceServerConfig }, null, 2))
-console.log({ serperAIConfig, openAIConfig, mainServiceServerConfig })
+import { logger } from '@the-long-chain/utils'
+import http from 'http'
+import { Context } from 'koa'
+import { authConfig } from './config/auth'
+import { mongoDbConfig } from './config/mongodb'
+import { blazeApiServerConfig } from './config/server'
+import getSchema from './graphqlResources'
+const port = blazeApiServerConfig.port
+
+setServerEssentialsLogger(logger)
+
+const start = async (): Promise<void> => {
+  exceptions()
+
+  const mongoDB = connectMongoDB(mongoDbConfig.uri, mongoDbConfig.options)
+
+  const schema = getSchema()
+  const app = await koaApp()
+  const httpServer = http.createServer(app.callback())
+
+  // Set up Apollo Server
+  const apolloServer = await apolloServerPlugin(schema, httpServer)
+
+  router.post(
+    '/graphql',
+    koaMiddleware(apolloServer, {
+      context: async ({ ctx }) => {
+        logger.debug(`operationName: ${ctx.request.body['operationName']}`)
+        const adminToken = ctx.request.headers[authConfig.adminToken.header]
+        if (adminToken) {
+          if (adminToken === authConfig.adminToken.token) ctx.admin = true
+          else logger.error(`Invalid admin token: ${adminToken}`)
+        }
+        const token = ctx.request.headers[authConfig.jwt.header]
+
+        if (token) ctx.token = token
+        return ctx
+      },
+    })
+  )
+  router.get('/graphql', koaMiddleware(apolloServer))
+  router.get('/health', (ctx: Context) => {
+    ctx.status = 200
+  })
+
+  await getRootRoute({
+    healthChecks: { database: mongoDB.healthCheck },
+    service: process.env['NX_TASK_TARGET_PROJECT'] || '',
+    developer: {
+      name: 'Sanyam Arya',
+      email: 'sanyam@beeta.one',
+    },
+  })
+
+  app.use(router.routes()).use(router.allowedMethods())
+  const server = httpServer
+    .listen({ port }, () => {
+      logger.info(`Server listening on ${blazeApiServerConfig.host}`)
+      logger.info(`GraphQL server listening on ${blazeApiServerConfig.graphqlURL}`)
+    })
+    .on('error', err => {
+      logger.error(err)
+      process.exit(1)
+    })
+
+  const onShutdown = async (): Promise<void> => {
+    disconnectMongoDB()
+    logger.info('Shutting down server...')
+  }
+
+  gracefulShutdown(server, onShutdown)
+}
+
+start()

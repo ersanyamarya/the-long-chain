@@ -2,7 +2,7 @@ import { Readability } from '@mozilla/readability'
 import { JSDOM } from 'jsdom'
 import puppeteer from 'puppeteer'
 import { YoutubeTranscript } from 'youtube-transcript'
-import logger from '../../logger'
+import { logger } from '../../logger'
 
 const isLinkYoutube = (link: string) => {
   return link.includes('youtube.com')

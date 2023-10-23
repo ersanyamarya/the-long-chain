@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql/error'
-import logger from '../../logger'
+import { logger } from '../../logger'
 import { ErrorCode, errorData } from './errorCodes'
 const GQLErrorHandler = (message: string, code: ErrorCode, context?: Record<string, unknown>) => {
   logger.error(JSON.stringify({ message, code, context }, null, 2))

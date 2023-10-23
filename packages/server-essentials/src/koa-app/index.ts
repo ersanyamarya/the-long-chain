@@ -1,7 +1,7 @@
 import cors from '@koa/cors'
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
-import logger from '../logger'
+import { logger } from '../logger'
 import requestLoggerMiddleware from './middleware/request-logger'
 export const koaApp = async (): Promise<Koa> => {
   logger.info('---------------> Creating Koa App <---------------')

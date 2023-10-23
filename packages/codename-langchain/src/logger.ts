@@ -1,9 +1,11 @@
-import { Logger } from 'winston'
+import { Logger, createLogger } from 'winston'
 
-let logger: Logger
+let logger: Logger = createLogger({
+  level: 'debug',
+})
 
-export function setLogger(l: Logger) {
+export function setCodeNameLangChainLogger(l: Logger) {
   logger = l
 }
 
-export default logger
+export { logger }

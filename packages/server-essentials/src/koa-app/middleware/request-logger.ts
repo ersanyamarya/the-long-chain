@@ -1,5 +1,5 @@
 import { Context, Next } from 'koa'
-import logger from '../../logger'
+import { logger } from '../../logger'
 export default () =>
   async (ctx: Context, next: Next): Promise<void> => {
     const started = Date.now()

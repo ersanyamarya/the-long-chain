@@ -1,7 +1,7 @@
 import { OpenAI } from 'langchain/llms/openai'
 import { OutputFixingParser, StructuredOutputParser } from 'langchain/output_parsers'
 import { ZodTypeAny } from 'zod'
-import logger from '../logger'
+import { logger } from '../logger'
 
 /**
  * The function `parseOutput` takes in an output string, a parsed response object, an OpenAI instance,

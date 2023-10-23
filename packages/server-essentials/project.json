@@ -14,7 +14,8 @@
         "main": "packages/server-essentials/src/index.ts",
         "assets": ["packages/server-essentials/*.md"],
         "updateBuildableProjectDepsInPackageJson": true,
-        "buildableProjectDepsInPackageJsonType": "dependencies"
+        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "watch": true
       }
     },
     "publish": {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { IncomingMessage, Server, ServerResponse } from 'http'
 import { Socket as NetSocket } from 'net'
-import logger from '../logger'
+import { logger } from '../logger'
 interface Socket extends NetSocket {
   isIdle: boolean
 }

@@ -1,6 +1,6 @@
 import Router from '@koa/router'
 import { Context } from 'koa'
-import logger from '../logger'
+import { logger } from '../logger'
 export const router = new Router()
 
 export type RouteObject = {

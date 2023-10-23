@@ -1,7 +1,7 @@
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { OpenAI } from 'langchain/llms/openai'
 import { PromptTemplate } from 'langchain/prompts'
-import logger from '../logger'
+import { logger } from '../logger'
 import { getRetrievalChain } from '../utils'
 
 const summarizeTemplatePrompt = `I want the following document to be summarized with context: {objective}.
