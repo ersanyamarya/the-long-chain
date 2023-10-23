@@ -7,12 +7,15 @@
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
+
       "options": {
         "outputPath": "dist/packages/codename-langchain",
         "tsConfig": "packages/codename-langchain/tsconfig.lib.json",
         "packageJson": "packages/codename-langchain/package.json",
         "main": "packages/codename-langchain/src/index.ts",
-        "assets": ["packages/codename-langchain/*.md"]
+        "assets": ["packages/codename-langchain/*.md"],
+        "updateBuildableProjectDepsInPackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "dependencies"
       }
     },
     "publish": {
