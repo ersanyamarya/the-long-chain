@@ -10,21 +10,38 @@ const topicSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Workspace',
     },
-    content: {
-      type: [
-        {
-          kind: {
-            type: String,
-            enum: ['blog', 'post'],
-            required: true,
-          },
-          data: {
-            type: String,
-            required: true,
-          },
+    questions: [String],
+    knowledgeBase: [
+      {
+        _id: false,
+        kind: {
+          type: String,
+          enum: ['webpage', 'youtube', 'text'],
+          required: true,
         },
-      ],
-    },
+        data: {
+          type: String,
+          required: true,
+        },
+        summary: {
+          type: String,
+        },
+      },
+    ],
+    content: [
+      {
+        _id: false,
+        kind: {
+          type: String,
+          enum: ['blog', 'post'],
+          required: true,
+        },
+        data: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
@@ -37,6 +54,12 @@ const topicSchema = new Schema(
 export interface ITopic extends Document {
   name: string
   workspaceId: string
+  questions: string[]
+  knowledgeBase: {
+    kind: string
+    data: string
+    summary: string
+  }[]
   content: {
     kind: string
     data: string

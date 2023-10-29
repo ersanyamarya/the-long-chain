@@ -74,8 +74,32 @@ TopicTC.addResolver({
   },
 })
 
+// Topic List
+TopicTC.addResolver({
+  kind: 'query',
+  name: 'topicList',
+  description: 'This is a topic list',
+  args: {
+    workspaceId: {
+      type: 'MongoID',
+      defaultValue: '',
+    },
+    searchString: {
+      type: 'String',
+      defaultValue: '',
+    },
+  },
+  type: [TopicTC],
+  resolve: async ({ args, context }) => {
+    const query = await getBaseQuery(args)
+    const items = await TopicModel.find(query)
+    return items
+  },
+})
+
 const queries = {
   topicPagination: TopicTC.getResolver('topicPagination'),
+  topicList: TopicTC.getResolver('topicList'),
 }
 
 export default {
