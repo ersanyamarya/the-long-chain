@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "appspot",
+    "Arya",
     "aryantriki",
     "bodyparser",
     "Buildable",
@@ -11,6 +12,8 @@
     "langchain",
     "llms",
     "openai",
-    "serper"
+    "Sanyam",
+    "serper",
+    "zustand"
   ]
 }

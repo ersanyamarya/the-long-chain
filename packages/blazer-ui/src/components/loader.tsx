@@ -6,7 +6,7 @@ interface LoaderProps {
   className?: string
 }
 
-export function BeetaLoader({ size = 32, containerSize, className }: LoaderProps) {
+export function BlazerLoader({ size = 32, containerSize, className }: LoaderProps) {
   if (!containerSize) containerSize = '100vh'
   return (
     <Stack spacing={2} alignItems="center" justifyContent="center" sx={{ height: containerSize }}>

@@ -12,12 +12,12 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-export interface BeetaDialogProps extends DialogProps {
+export interface BlazerDialogProps extends DialogProps {
   title?: string
   actions?: ReactNode
 }
 
-export function BeetaDialog({ title, actions, children, ...props }: BeetaDialogProps) {
+export function BlazerDialog({ title, actions, children, ...props }: BlazerDialogProps) {
   return (
     <Dialog TransitionComponent={Transition} keepMounted {...props}>
       {title && <DialogTitle>{title}</DialogTitle>}

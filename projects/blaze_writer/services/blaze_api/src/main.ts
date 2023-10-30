@@ -68,7 +68,7 @@ const start = async (): Promise<void> => {
     service: process.env['NX_TASK_TARGET_PROJECT'] || '',
     developer: {
       name: 'Sanyam Arya',
-      email: 'sanyam@beeta.one',
+      email: 'er.sanyam.arya@gmai.com',
     },
   })
 
