@@ -1,0 +1,12 @@
+overwrite: true
+schema: ${NX_MAIN_SERVICE_HOST}/graphql
+documents: "**/*.{gql,graphql}"
+generates:
+  src/types/apollo.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

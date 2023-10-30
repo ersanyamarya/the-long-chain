@@ -1,0 +1,16 @@
+{
+  "name": "api-operations",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "projects/blaze_writer/shared/api-operations/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["projects/blaze_writer/shared/api-operations/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}
