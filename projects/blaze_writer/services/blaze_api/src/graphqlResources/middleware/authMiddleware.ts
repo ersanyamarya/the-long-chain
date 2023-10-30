@@ -2,6 +2,7 @@
 
 import { GQLErrorHandler } from '@ersanyamarya/server-essentials'
 import { IUser, UserModel } from '@the-long-chain/blaze-mongo'
+import { auth } from 'firebase-admin'
 import { Types } from 'mongoose'
 
 const authMiddleware = async (resolve, source, args, context, info) => {
@@ -37,9 +38,8 @@ const authMiddleware = async (resolve, source, args, context, info) => {
 
 const getDataFromToken = async (token: string): Promise<{ email: string }> => {
   try {
-    // const decodedToken = await auth().verifyIdToken(token)
-    // return { email: decodedToken.email }
-    return { email: '' }
+    const decodedToken = await auth().verifyIdToken(token)
+    return { email: decodedToken.email }
   } catch (error) {
     GQLErrorHandler('Error Decoding Token', 'UNAUTHENTICATED', {
       error,

@@ -11,18 +11,26 @@ import {
 import { connectMongoDB, disconnectMongoDB } from '@the-long-chain/blaze-mongo'
 
 import { logger } from '@the-long-chain/utils'
+import { credential } from 'firebase-admin'
+import { initializeApp } from 'firebase-admin/app'
 import http from 'http'
 import { Context } from 'koa'
 import { authConfig } from './config/auth'
+import { getFirebaseConfig } from './config/firebase'
 import { mongoDbConfig } from './config/mongodb'
 import { blazeApiServerConfig } from './config/server'
 import getSchema from './graphqlResources'
 const port = blazeApiServerConfig.port
 
+const serviceAccount = getFirebaseConfig('fireBaseAdmin.json')
+
 setServerEssentialsLogger(logger)
 
 const start = async (): Promise<void> => {
   exceptions()
+  initializeApp({
+    credential: credential.cert(serviceAccount),
+  })
 
   const mongoDB = connectMongoDB(mongoDbConfig.uri, mongoDbConfig.options)
 
