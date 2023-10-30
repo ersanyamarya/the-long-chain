@@ -4,12 +4,24 @@ import { useUserPostLoginCheckMutation } from '@the-long-chain/api-operations'
 import { onAuthStateChanged } from 'firebase/auth'
 import { enqueueSnackbar } from 'notistack'
 import { Suspense, useEffect, useState } from 'react'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { auth } from './firebase'
 import { useAuthStore } from './global_states/auth-store'
-
+import { AppLayout } from './layouts/app'
+import { LandingLayout } from './layouts/landing'
+import { LoginPage } from './pages'
 function LazyLoaded({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<BlazerLoader size={100} />}>{children}</Suspense>
+}
+
+function AuthRoute({ children, isAuthenticated }: { children: React.ReactNode; isAuthenticated: boolean }) {
+  if (!isAuthenticated) return <Navigate to="/" />
+  return <LazyLoaded>{children}</LazyLoaded>
+}
+
+function PublicRoute({ children, isAuthenticated }: { children: React.ReactNode; isAuthenticated: boolean }) {
+  if (isAuthenticated) return <Navigate to="/app" />
+  return <LazyLoaded>{children}</LazyLoaded>
 }
 
 export default function Routing() {
@@ -48,6 +60,9 @@ export default function Routing() {
       }
     },
     onError: e => {
+      console.log('Error in userPostLoginCheck')
+      console.log(e)
+
       enqueueSnackbar(e.message, { variant: 'error' })
     },
   })
@@ -58,11 +73,26 @@ export default function Routing() {
         <Route
           path="/"
           element={
-            <LazyLoaded>
-              <Typography variant="h1">Hello World</Typography>
-            </LazyLoaded>
+            <PublicRoute isAuthenticated={user._id !== ''}>
+              <LandingLayout />
+            </PublicRoute>
           }
-        />
+        >
+          <Route path="/" element={<LoginPage />} />
+        </Route>
+        <Route
+          path="/app"
+          element={
+            <AuthRoute isAuthenticated={user._id !== ''}>
+              <AppLayout />
+            </AuthRoute>
+          }
+        >
+          <Route path="/app" element={<Typography variant="h1">Hello World Engineering</Typography>} />
+
+          <Route path="/app/*" element={<Navigate to="/app" />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   )
