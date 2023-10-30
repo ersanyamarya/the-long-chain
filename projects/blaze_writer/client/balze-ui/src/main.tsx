@@ -1,8 +1,10 @@
 import { ApolloProvider } from '@apollo/client/react/context'
 import { ThemeContainer } from '@ersanyamarya/blazer-ui'
 import { CssBaseline } from '@mui/material'
+import { SnackbarProvider } from 'notistack'
 import { StrictMode } from 'react'
 import * as ReactDOM from 'react-dom/client'
+import { NotiStackComponents } from './StyledMaterialDesignContent'
 import { client } from './client'
 import Routing from './routing'
 
@@ -11,9 +13,17 @@ root.render(
   <StrictMode>
     <ThemeContainer>
       <CssBaseline />
-      <ApolloProvider client={client}>
-        <Routing />
-      </ApolloProvider>
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        preventDuplicate
+        autoHideDuration={3000}
+        Components={NotiStackComponents}
+      >
+        <ApolloProvider client={client}>
+          <Routing />
+        </ApolloProvider>
+      </SnackbarProvider>
     </ThemeContainer>
   </StrictMode>
 )

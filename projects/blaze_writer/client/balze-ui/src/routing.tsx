@@ -1,12 +1,15 @@
+import { BlazerLoader } from '@ersanyamarya/blazer-ui'
 import { Typography } from '@mui/material'
 import { useUserPostLoginCheckMutation } from '@the-long-chain/api-operations'
 import { onAuthStateChanged } from 'firebase/auth'
+import { enqueueSnackbar } from 'notistack'
 import { Suspense, useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { auth } from './firebase'
 import { useAuthStore } from './global_states/auth-store'
+
 function LazyLoaded({ children }: { children: React.ReactNode }) {
-  return <Suspense fallback={<h1> Loading </h1>}>{children}</Suspense>
+  return <Suspense fallback={<BlazerLoader size={100} />}>{children}</Suspense>
 }
 
 export default function Routing() {
@@ -45,9 +48,10 @@ export default function Routing() {
       }
     },
     onError: e => {
-      //  enqueueSnackbar(e.message, { variant: 'error' })
+      enqueueSnackbar(e.message, { variant: 'error' })
     },
   })
+  if (loading) return <BlazerLoader size={100} />
   return (
     <Router>
       <Routes>

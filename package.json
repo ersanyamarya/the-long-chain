@@ -78,6 +78,7 @@
     "koa-bodyparser": "^4.4.1",
     "langchain": "^0.0.170",
     "mongoose": "^7.6.3",
+    "notistack": "^3.0.1",
     "openai": "^4.12.4",
     "puppeteer": "^19.11.1",
     "react": "18.2.0",
