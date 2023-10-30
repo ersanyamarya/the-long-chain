@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import { Suspense } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
@@ -13,8 +14,7 @@ export default function Routing() {
           path="/"
           element={
             <LazyLoaded>
-              {' '}
-              <h1> Hello</h1>{' '}
+              <Typography variant="h1">Hello World</Typography>
             </LazyLoaded>
           }
         />

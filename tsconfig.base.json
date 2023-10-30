@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ersanyamarya/blazer-ui": ["packages/blazer-ui/src/index.ts"],
       "@ersanyamarya/codename-langchain": ["packages/codename-langchain/src/index.ts"],
       "@ersanyamarya/server-essentials": ["packages/server-essentials/src/index.ts"],
       "@the-long-chain/blaze-mongo": ["projects/blaze_writer/shared/blaze-mongo/src/index.ts"],
