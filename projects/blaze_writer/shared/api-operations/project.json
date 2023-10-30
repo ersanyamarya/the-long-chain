@@ -11,6 +11,17 @@
       "options": {
         "lintFilePatterns": ["projects/blaze_writer/shared/api-operations/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "cd projects/blaze_writer/shared/api-operations && graphql-codegen --require dotenv/config --config codegen.yml --verbose"
+          }
+        ],
+        "parallel": false
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 overwrite: true
-schema: ${NX_MAIN_SERVICE_HOST}/graphql
+schema: ${NX_BLAZE_MAIN_SERVICE_HOST}/graphql
 documents: "**/*.{gql,graphql}"
 generates:
   src/types/apollo.tsx:

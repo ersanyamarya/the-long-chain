@@ -1,0 +1,20 @@
+mutation UserPostLoginCheck {
+  userPostLoginCheck {
+    name
+    email
+    quota {
+      workspace
+    }
+    fireBaseAuthID
+    deleteRequest {
+      token
+      expiresAt
+      reason
+    }
+    lastLogin
+    _id
+    createdAt
+    updatedAt
+    developer
+  }
+}

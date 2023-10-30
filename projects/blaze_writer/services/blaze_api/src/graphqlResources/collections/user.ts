@@ -45,7 +45,9 @@ UserTC.addResolver({
 export default {
   ResourceTC: UserTC,
   queries: { ...queries },
-  mutations: { ...mutations },
+  mutations: {
+    userPostLoginCheck: UserTC.getResolver('userPostLoginCheck'),
+  },
   ResourceModel: UserModel,
   name: 'User',
 }
