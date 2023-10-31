@@ -1,11 +1,11 @@
 import { PaletteMode, SimplePaletteColorOptions, TypeBackground } from '@mui/material'
 
 export const primary: SimplePaletteColorOptions = {
-  main: '#240B36',
+  main: '#FDA535',
 }
 
 export const secondary: SimplePaletteColorOptions = {
-  main: '#607196',
+  main: '#FC5B3D',
 }
 
 export const success: SimplePaletteColorOptions = {
@@ -41,4 +41,4 @@ export const background = (mode: PaletteMode): TypeBackground => {
   }
 }
 
-export const primaryGradient = `linear-gradient(180deg, ${secondary.main} 0%, ${primary.main}  100%)`
+export const primaryGradient = `linear-gradient(180deg, ${primary.main} -67.73%, ${secondary.main}  133.92%)`

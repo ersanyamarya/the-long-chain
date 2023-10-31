@@ -4,7 +4,7 @@ import DosisBold from '../assets/fonts/DosisBold.ttf'
 import DosisLight from '../assets/fonts/DosisLight.ttf'
 import DosisMedium from '../assets/fonts/DosisMedium.ttf'
 import DosisRegular from '../assets/fonts/DosisRegular.ttf'
-import { background, error, info, primary, secondary, success, warning } from './colors'
+import { background, error, info, primary, primaryGradient, secondary, success, warning } from './colors'
 const fontFamily = [
   'Dosis',
   '-apple-system',
@@ -105,6 +105,15 @@ const getTheme = (mode: PaletteMode): Theme => {
           },
         },
       },
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            padding: '0.4rem',
+            borderRadius: '0.4rem',
+            width: 'fit-content',
+          },
+        },
+      },
       MuiFab: {
         defaultProps: {
           color: 'primary',
@@ -148,7 +157,7 @@ const getTheme = (mode: PaletteMode): Theme => {
       },
       MuiDrawer: {
         defaultProps: {
-          variant: 'permanent',
+          variant: 'persistent',
           anchor: 'left',
           color: 'primary',
         },
@@ -156,18 +165,16 @@ const getTheme = (mode: PaletteMode): Theme => {
           root: {
             width: '100%',
             height: '100%',
-
             flexShrink: 0,
             alignItems: 'center',
             whiteSpace: 'nowrap',
             boxSizing: 'border-box',
-            boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
           },
           paper: {
-            padding: '1rem 0',
+            // padding: '1rem 0',
             width: 'inherit',
             height: 'inherit',
-            background: 'linear-gradient(0deg, #240B36 0%, #483457 99.08%)',
+            background: primaryGradient,
             color: '#fff',
           },
         },
@@ -276,4 +283,4 @@ const getTheme = (mode: PaletteMode): Theme => {
   return theme
 }
 
-export { fontFamily, getTheme }
+export { fontFamily, getTheme, primaryGradient }

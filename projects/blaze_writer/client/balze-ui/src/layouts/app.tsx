@@ -1,19 +1,30 @@
 import {
   Avatar,
   Box,
-  Button,
-  CSSObject,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Theme,
+  AppBar as MuiAppBar,
+  AppBarProps as MuiAppBarProps,
+  Toolbar,
+  Typography,
   styled,
   useTheme,
 } from '@mui/material'
 import MuiDrawer from '@mui/material/Drawer'
-import { CompassTool, Cpu, DevToLogo, GearSix, SignOut, SquaresFour } from '@phosphor-icons/react'
+import {
+  CaretLeft,
+  CompassTool,
+  Cpu,
+  DevToLogo,
+  GearSix,
+  List as ListIcon,
+  SignOut,
+  SquaresFour,
+} from '@phosphor-icons/react'
 import { Cube } from '@phosphor-icons/react/dist/ssr'
 import { useState } from 'react'
 import { NavLink, useLocation, useNavigate, useOutlet } from 'react-router-dom'
@@ -21,70 +32,62 @@ import { auth } from '../firebase'
 // import { useMasterStore, useWorkspaceStore } from '../global_states'
 import { useAuthStore } from '../global_states/auth-store'
 const drawerWidth = 240
-
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: 'hidden',
-})
-
-const closedMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create('width', {
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean
+}
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: prop => prop !== 'open',
+})<AppBarProps>(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 16px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 16px)`,
-  },
-})
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}))
+
+const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })<{
+  open?: boolean
+}>(({ theme, open }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(1, 8),
+  transition: theme.transitions.create('margin', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  marginLeft: `-${drawerWidth}px`,
+  ...(open && {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  }),
+}))
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
+  justifyContent: 'space-between',
 }))
 
-// interface AppBarProps extends MuiAppBarProps {
-//   open?: boolean
-// }
-
-// const AppBar = styled(MuiAppBar, {
-//   shouldForwardProp: prop => prop !== 'open',
-// })<AppBarProps>(({ theme, open }) => ({
-//   zIndex: theme.zIndex.drawer + 1,
-//   transition: theme.transitions.create(['width', 'margin'], {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   ...(open && {
-//     marginLeft: drawerWidth,
-//     width: `calc(100% - ${drawerWidth}px)`,
-//     transition: theme.transitions.create(['width', 'margin'], {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//   }),
-// }))
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: prop => prop !== 'open' })(({ theme, open }) => ({
+const Drawer = styled(MuiDrawer)(({ theme }) => ({
   width: drawerWidth,
-
-  ...(open && {
-    ...openedMixin(theme),
-    '& .MuiDrawer-paper': openedMixin(theme),
-  }),
-  ...(!open && {
-    ...closedMixin(theme),
-    '& .MuiDrawer-paper': closedMixin(theme),
-  }),
+  overflowX: 'hidden',
+  flexShrink: 0,
+  '& .MuiDrawer-paper': {
+    width: drawerWidth,
+    boxSizing: 'border-box',
+  },
 }))
 
 const NavigationLink = styled(NavLink, { shouldForwardProp: prop => prop !== 'state' })(({ theme, state }) => ({
@@ -170,27 +173,39 @@ export function AppLayout() {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
 
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    setOpen(false)
-  }
   return (
-    <Box sx={{ height: '100vh', display: 'flex' }}>
-      <Drawer variant="permanent" open={open} component="nav">
-        <DrawerHeader>
-          <Button
-            variant="text"
+    <Box sx={{ display: 'flex' }}>
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          <IconButton
             color="inherit"
-            sx={{ fontSize: theme.typography.h4, fontWeight: 700, fontFamily: 'Neue Machina' }}
+            aria-label="open drawer"
             onClick={() => {
-              open ? handleDrawerClose() : handleDrawerOpen()
+              setOpen(!open)
+            }}
+            edge="start"
+            sx={{
+              ...(open && { display: 'none' }),
+
+              borderRadius: '0.4rem',
             }}
           >
-            b1
-          </Button>
+            <ListIcon size={32} />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Persistent drawer
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      <Drawer open={open} component="nav" onClose={() => setOpen(false)}>
+        <DrawerHeader>
+          <Typography variant="h3" color="inherit">
+            Blaze
+          </Typography>
+          <IconButton color="inherit" aria-label="open drawer" onClick={() => setOpen(false)} edge="start">
+            <CaretLeft size={32} />
+          </IconButton>
         </DrawerHeader>
         <List
           sx={{
@@ -274,9 +289,10 @@ export function AppLayout() {
           </ListItem>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1 }}>
+      <Main open={open}>
+        <DrawerHeader />
         {outlet}
-      </Box>
+      </Main>
     </Box>
   )
 }

@@ -11,7 +11,7 @@ const TemplateContainer = styled(Box)`
 
   .left {
     color: white;
-    background: linear-gradient(117deg, #2c2e4a 0.41%, #240b36 99.22%);
+    background: linear-gradient(154deg, rgba(253, 165, 53, 0.17) -67.73%, rgba(252, 91, 61, 0.62) 133.92%);
   }
 
   .right {
@@ -31,11 +31,11 @@ export function LandingLayout() {
   return (
     <TemplateContainer>
       <Stack spacing={0.2} alignItems="center" justifyContent="center" className="left">
-        <Typography variant="h1" component="h1" gutterBottom align="center" sx={{ fontFamily: 'Neue Machina' }}>
-          beeta one
+        <Typography variant="h1" component="h1" gutterBottom align="center">
+          Blaze Writer
         </Typography>
-        <Typography variant="h4" component="h2" gutterBottom align="center" sx={{ fontFamily: 'Neue Machina' }}>
-          Unleash Data Power.
+        <Typography variant="h3" component="h2" gutterBottom align="center">
+          Write Smarter and Faster
         </Typography>
       </Stack>
       <Stack spacing={4} alignItems="center" justifyContent="center" className="right">
