@@ -1,3 +1,4 @@
+import { primaryGradient } from '@ersanyamarya/blazer-ui'
 import { Box, Stack, Typography, styled } from '@mui/material'
 import { useOutlet } from 'react-router-dom'
 
@@ -11,7 +12,7 @@ const TemplateContainer = styled(Box)`
 
   .left {
     color: white;
-    background: linear-gradient(154deg, rgba(253, 165, 53, 0.17) -67.73%, rgba(252, 91, 61, 0.62) 133.92%);
+    background: ${primaryGradient};
   }
 
   .right {

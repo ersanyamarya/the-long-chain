@@ -1,11 +1,11 @@
 import { PaletteMode, SimplePaletteColorOptions, TypeBackground } from '@mui/material'
 
 export const primary: SimplePaletteColorOptions = {
-  main: '#FDA535',
+  main: '#006BA6',
 }
 
 export const secondary: SimplePaletteColorOptions = {
-  main: '#FC5B3D',
+  main: '#0FF4C6',
 }
 
 export const success: SimplePaletteColorOptions = {

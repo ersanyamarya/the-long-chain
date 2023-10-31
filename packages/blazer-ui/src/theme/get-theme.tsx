@@ -133,6 +133,7 @@ const getTheme = (mode: PaletteMode): Theme => {
         },
         styleOverrides: {
           root: {
+            background: primaryGradient,
             height: '64px',
             lineHeight: '64px',
           },

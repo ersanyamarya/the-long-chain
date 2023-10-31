@@ -185,15 +185,15 @@ export function AppLayout() {
             }}
             edge="start"
             sx={{
-              ...(open && { display: 'none' }),
+              ...(open && { opacity: 0 }),
 
               borderRadius: '0.4rem',
             }}
           >
             <ListIcon size={32} />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+          <Typography variant="h5" noWrap component="div">
+            Blaze Writer
           </Typography>
         </Toolbar>
       </AppBar>
